@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>COC Base Convert</title>
+  <title></title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -27,12 +27,14 @@
     function convert() {
       var text = document.getElementById("inputText").value;
       text = text.substring(text.indexOf('Base 1.'), text.length);
+      text = text.replace(/(\r\n|\n|\r)/gm, "");
+      console.log(text);
       var index1 = text.indexOf('span>');
       var index2 = text.indexOf('q=https');
       var index3 = text.indexOf('rel=');
       var index4 = text.indexOf(' yt-formatted-string">');
       while (index1 >= 0 && index2 >= 0 && index3 >= 0 && index4 >= 0) {
-        text = text.substring(0, index1 - 2) + decodeURIComponent(text.substring(index2 + 2, index3 - 2)) + text.substring(index4 + 22);
+        text = text.substring(0, index1 - 2) + decodeURIComponent(text.substring(index2 + 2, index3 - 2)) + '\r\n' + text.substring(index4 + 22);
         index1 = text.indexOf('span>');
         index2 = text.indexOf('q=https');
         index3 = text.indexOf('rel=');
@@ -56,7 +58,7 @@
 
 <br>
 
-<textarea id="outputText" data-autoresize2 rows="20" onchange="alert('You just changed the textarea.')"></textarea>
+<textarea id="outputText" data-autoresize2 rows="20"></textarea>
 
 <script>
     function addAutoResize() {
