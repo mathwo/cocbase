@@ -1,0 +1,88 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <title>COC Base Convert</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta property="og:title" content="">
+  <meta property="og:type" content="">
+  <meta property="og:url" content="">
+  <meta property="og:image" content="">
+  <style>
+    textarea {
+      box-sizing: border-box;
+      resize: none;
+      width: 100%;
+      padding: 5px 8px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+  </style>
+  <script>
+    function convert() {
+      var text = document.getElementById("inputText").value;
+      text = text.substring(text.indexOf('Base 1.'), text.length);
+      var index1 = text.indexOf('span>');
+      var index2 = text.indexOf('q=https');
+      var index3 = text.indexOf('rel=');
+      var index4 = text.indexOf(' yt-formatted-string">');
+      while (index1 >= 0 && index2 >= 0 && index3 >= 0 && index4 >= 0) {
+        text = text.substring(0, index1 - 2) + decodeURIComponent(text.substring(index2 + 2, index3 - 2)) + text.substring(index4 + 22);
+        index1 = text.indexOf('span>');
+        index2 = text.indexOf('q=https');
+        index3 = text.indexOf('rel=');
+        index4 = text.indexOf(' yt-formatted-string">');
+      }
+      var output = document.getElementById("outputText");
+      output.value = text;
+    }
+  </script>
+
+  <meta name="theme-color" content="#fafafa">
+</head>
+
+<body>
+
+<textarea id="inputText" data-autoresize rows="20"></textarea>
+
+<br>
+
+<button onclick="convert();">Convert</button>
+
+<br>
+
+<textarea id="outputText" data-autoresize2 rows="20" onchange="alert('You just changed the textarea.')"></textarea>
+
+<script>
+    function addAutoResize() {
+      document.querySelectorAll('[data-autoresize]').forEach(function (element) {
+        element.style.boxSizing = 'border-box';
+        var offset = element.offsetHeight - element.clientHeight;
+        element.addEventListener('input', function (event) {
+          console.log("detected input");
+          event.target.style.height = 'auto';
+          event.target.style.height = event.target.scrollHeight + offset + 'px';
+        });
+        element.removeAttribute('data-autoresize');
+      });
+      document.querySelectorAll('[data-autoresize2]').forEach(function (element) {
+        element.style.boxSizing = 'border-box';
+        var offset = element.offsetHeight - element.clientHeight;
+        element.addEventListener('input', function (event) {
+          console.log("detected input too");
+          event.target.style.height = 'auto';
+          event.target.style.height = event.target.scrollHeight + offset + 'px';
+        });
+        element.removeAttribute('data-autoresize2');
+      });
+    }
+    addAutoResize();
+</script>
+</body>
+
+</html>
