@@ -28,17 +28,17 @@
       var text = document.getElementById("inputText").value;
       text = text.substring(text.indexOf('Base 1.'), text.length);
       text = text.replace(/(\r\n|\n|\r)/gm, "");
-      console.log(text);
       var index1 = text.indexOf('span>');
       var index2 = text.indexOf('q=https');
       var index3 = text.indexOf('rel=');
-      var index4 = text.indexOf(' yt-formatted-string">');
+      var index4 = text.substring(index3).indexOf(' yt-formatted-string">');
       while (index1 >= 0 && index2 >= 0 && index3 >= 0 && index4 >= 0) {
-        text = text.substring(0, index1 - 2) + decodeURIComponent(text.substring(index2 + 2, index3 - 2)) + '\r\n' + text.substring(index4 + 22);
+        text = text.substring(0, index1 - 2) + decodeURIComponent(text.substring(index2 + 2, index3 - 2)) +
+          '\r\n' + text.substring(index3).substring(index4 + 22);
         index1 = text.indexOf('span>');
         index2 = text.indexOf('q=https');
         index3 = text.indexOf('rel=');
-        index4 = text.indexOf(' yt-formatted-string">');
+        index4 = text.substring(index3).indexOf(' yt-formatted-string">');
       }
       var output = document.getElementById("outputText");
       output.value = text;
@@ -66,7 +66,6 @@
         element.style.boxSizing = 'border-box';
         var offset = element.offsetHeight - element.clientHeight;
         element.addEventListener('input', function (event) {
-          console.log("detected input");
           event.target.style.height = 'auto';
           event.target.style.height = event.target.scrollHeight + offset + 'px';
         });
@@ -76,7 +75,6 @@
         element.style.boxSizing = 'border-box';
         var offset = element.offsetHeight - element.clientHeight;
         element.addEventListener('input', function (event) {
-          console.log("detected input too");
           event.target.style.height = 'auto';
           event.target.style.height = event.target.scrollHeight + offset + 'px';
         });
