@@ -40,6 +40,21 @@
         index3 = text.indexOf('rel=');
         index4 = text.substring(index3).indexOf(' yt-formatted-string">');
       }
+      text = text.replace(/lavahound/gi, '狗');
+      text = text.replace(/lava hound/gi, '狗');
+      text = text.replace(/archers/gi, '弓');
+      text = text.replace(/archer/gi, '弓');
+      text = text.replace(/goblins/gi, '哥不林');
+      text = text.replace(/goblin/gi, '哥不林');
+      text = text.replace(/icegolem/gi, '冰人');
+      text = text.replace(/ice golem/gi, '冰人');
+      text = text.replace(/hunters/gi, '捕手');
+      text = text.replace(/hunter/gi, '捕手');
+      text = text.replace(/witches/gi, '女巫');
+      text = text.replace(/witch/gi, '女巫');
+      text = text.replace(/superminions/gi, '超级苍蝇');
+      text = text.replace(/super minions/gi, '超级苍蝇');
+      
       var output = document.getElementById("outputText");
       output.value = text;
     }
