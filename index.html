@@ -35,7 +35,7 @@
       while (index1 >= 0 && index2 >= 0 && index3 >= 0 && index4 >= 0) {
         var temptext = decodeURIComponent(text.substring(index2 + 2, index3 - 2));
         var index5 = temptext.indexOf('platform=');
-        if (index5 >= 0) {
+        if (index5 > 0) {
           temptext = temptext.substring(0, index5 - 1);
         }
         text = text.substring(0, index1 - 2) + temptext + '\r\n' + text.substring(index3).substring(index4 + 22);
